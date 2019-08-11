@@ -11,8 +11,8 @@ import {toMoney} from '@/filter/moneyFilter.js'//价格过滤器
 // Vue.use(Vant);
 
 //按需引入
-import {Button,Row,Col,Swipe,SwipeItem,Lazyload,List} from 'vant';
-Vue.use(Button).use(Row).use(Col).use(Swipe).use(SwipeItem).use(Lazyload).use(List)
+import {PullRefresh,Button,Row,Col,Swipe,SwipeItem,Lazyload,List,Field,NavBar,tab,tabs} from 'vant';
+Vue.use(PullRefresh).use(Button).use(Row).use(Col).use(Swipe).use(SwipeItem).use(Lazyload).use(List).use(Field).use(NavBar).use(tab).use(tabs)
 
 Vue.config.productionTip = false
 Vue.filter('moneyFilter', toMoney)//价格过滤器
