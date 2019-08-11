@@ -6,10 +6,10 @@
         <van-col span="3">
           <img :src="locationIcon" width="80%" alt class="location-icon" />
         </van-col>
-        <van-col span="16">
+        <van-col span="17">
           <input type="text" class="search-input" />
         </van-col>
-        <van-col span="5">
+        <van-col span="4">
           <van-button size="mini">查找</van-button>
         </van-col>
       </van-row>
@@ -67,7 +67,12 @@
         <van-list>
           <van-row gutter="20">
             <van-col span="12" v-for="(item,index) in hotGoods" :key="index">
-              <goods-info :goodsId="item.goodsId" :goodsImage="item.image" :goodsName="item.name" :goodsPrice="item.price"></goods-info>
+              <goods-info
+                :goodsId="item.goodsId"
+                :goodsImage="item.image"
+                :goodsName="item.name"
+                :goodsPrice="item.price"
+              ></goods-info>
             </van-col>
           </van-row>
         </van-list>
@@ -84,7 +89,7 @@ import { swiper, swiperSlide } from "vue-awesome-swiper"; //引入轮播插件
 // import swiperText from '../swiper/swiperText' //引入轮播组件
 import floorComponent from "../component/floorComponent"; //引入楼层组件
 import goodsInfo from "../component/goodsInfoComponent"; //商品信息组件
-import url from '@/serviceAPI.config.js'; // 数据接口文件
+import url from "@/serviceAPI.config.js"; // 数据接口文件
 export default {
   data() {
     return {
@@ -119,7 +124,7 @@ export default {
   },
   created() {
     axios({
-      url:url.getShoppingMallInfo,
+      url: url.getShoppingMallInfo,
       method: "get"
     })
       .then(response => {
@@ -214,5 +219,10 @@ export default {
   font-size: 14px;
   height: 1.8rem;
   line-height: 1.8rem;
+}
+.hot-goods {
+  height: 130rem;
+  overflow: scroll;
+  background-color: #fff;
 }
 </style>

@@ -31,13 +31,13 @@
           <div id="list-div">
             <van-pull-refresh v-model="isRefresh" @refresh="onRefresh">
               <van-list v-model="loading" :finished="finished" @load="onLoad">
-                <div class="list-item" v-for="(item,index) in goodList" :key="index">
+                <div class="list-item" @click="goGoodsInfo(item.ID)" v-for="(item,index) in goodList" :key="index">
                   <div class="list-item-img">
-                    <img :src="item.IMAGE1" width="100%" />
+                    <img :src="item.IMAGE1" width="100%" :onerror="errorImg" />
                   </div>
                   <div class="list-item-text">
                     <div>{{item.NAME}}</div>
-                    <div class>￥{{item.ORI_PRICE}}</div>
+                    <div class>￥{{item.ORI_PRICE | moneyFilter}}</div>
                   </div>
                 </div>
               </van-list>
@@ -66,7 +66,8 @@ export default {
       isRefresh: false, //下拉刷新
       page: 1, //商品列表的页数
       goodList: [], //商品信息
-      categorySubId: "" //商品子分类ID
+      categorySubId: "", //商品子分类ID
+      errorImg:'this.src="' + require('@/assets/images/errorimg.png') + '"'   ,  //错误图片显示路径
     };
   },
   created() {
@@ -75,7 +76,7 @@ export default {
   mounted() {
     let winHeight = document.documentElement.clientHeight;
     document.getElementById("leftNav").style.height = winHeight - 46 + "px";
-    document.getElementById("list-div").style.height = winHeight - 90 + "px";
+    document.getElementById("list-div").style.height = winHeight - 90 -50 + "px";
   },
   methods: {
     //获取大类数据
@@ -141,7 +142,9 @@ export default {
       setTimeout(() => {
         this.isRefresh = false;
         this.finished = false;
-        // this.list = [];
+        this.goodList=[];
+        this.page=1
+        this.onLoad()
         this.onLoad();
       }, 500);
     },
@@ -181,6 +184,10 @@ export default {
       this.page = 1;
       //
       this.onLoad();
+    },
+    // 跳转到商品 
+    goGoodsInfo(id) {
+      this.$router.push({name:'Goods',params:{goodsId:id}})
     }
   }
 };
@@ -232,5 +239,8 @@ export default {
   flex: 16;
   margin-top: 10px;
   margin-left: 10px;
+}
+.list-item-text{
+  line-height: 20px;
 }
 </style>

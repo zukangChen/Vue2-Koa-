@@ -103,7 +103,7 @@ router.post('/getCategorySubList', async (ctx) => {
 //根据商品类别获取商品列表(根据小类别的id获取商品的数据)
 router.post('/getGoodsListByCategorySubID', async (ctx) => {
   try {
-    console.log('1310')
+    // console.log('1310')
     let categorySubId = ctx.request.body.categorySubId //小类别的id
     let page =ctx.request.body.page //当前页数
     let num = 10 //每页显示数量
